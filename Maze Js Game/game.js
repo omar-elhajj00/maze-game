@@ -1,66 +1,66 @@
 //execute when the window finish , wait the window to load
 window.onload = function () {
 
-
-
     var game = document.getElementById("game");
     var start = document.getElementById("start");
-    var end = document.getElementById("end");
-    loseOrwin=document.getElementById("status")
+    var enda = document.getElementById("end");
+    enda.addEventListener("click", console.log('werrr'));
+    var loseOrwin=document.getElementById("status")
     var score = 0;
     var boundaries = document.getElementsByClassName("boundary");
-    startButton = document.getElementsByClassName('boundary')[5];
-    b = Array.from(boundaries);
-    var lost = false;
+    var startButton = document.getElementsByClassName('boundary')[5];
 
 
-    
     start.addEventListener("mouseenter", enterTheNarrowArea);
+    start.addEventListener("mouseleave", changeTheSColor);
     start.addEventListener("click", reset);
-    end.startEventListener("mouseenter", winner);
-    
-    
+
+    // get game over if the cursor touch any wall
     function enterTheNarrowArea() {
         for (var i = 0; i < boundaries.length-1;i++){
             boundaries[i].addEventListener("mouseover", gameOver);
         }
-
     }
 
+    //change the start button color when the cursor pass it
+    function changeTheSColor() {
+        start.style.backgroundColor = 'yellow';
+        enda.startEventListener("mouseleave", winner);
+    }
 
-
-
-
-    function winner() {
+    // function about the changes happen if the user passed the area successfully
+    function winner() { 
         loseOrwin.innerHTML = "YOU WIN! CONGRATULATION !"
         score += 5;
-        const para = document.createElement("p");
-        const node = document.createTextNode("your score is " +score);
-        para.appendChild(node);
+        enda.startEventListener("mouseleave", function winner1(){
+            for (var i = 0; i < boundaries.length-1;i++){
+            boundaries[i].style.backgroundColor = "green"
+        }
+        });
+        // const para = document.createElement("p");
+        // const node = document.createTextNode("your score is " +score);
+        // para.appendChild(node);
 
-        const element = document.getElementsByClassName("boundary")[4];
-        const child = document.getElementById("p1");
-        element.insertBefore(para,child);
+        // const element = document.getElementsByClassName("boundary")[4];
+        // const child = document.getElementById("p1");
+        // element.insertBefore(para, child);
+        
     }
 
-
-
-
-
+    // function if the user lost
     function gameOver() {
         for (var i = 0; i < boundaries.length-1;i++){
             boundaries[i].style.backgroundColor = "red";
         }
         loseOrwin.innerHTML = "YOU LOST! HARD LUCK"
-        loseOrWin.style.backgroundColor = "pink";
+        // loseOrWin.style.backgroundColor = "pink";
         startButton.innerHTML = "Start";
         startButton.style.padding = "0rem auto";
     }
 
+    // reset and refresh
     function reset() {
-
-        document.location.reload()
-        
+        document.location.reload();  
     }
 
 
