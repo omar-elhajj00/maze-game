@@ -5,30 +5,61 @@ window.onload = function () {
 
     var game = document.getElementById("game");
     var start = document.getElementById("start");
+    var end = document.getElementById("end");
+    loseOrwin=document.getElementById("status")
     var score = 0;
     var boundaries = document.getElementsByClassName("boundary");
     startButton = document.getElementsByClassName('boundary')[5];
     b = Array.from(boundaries);
     var lost = false;
 
-    start.addEventListener("mouseenter", enterTheNarrowArea);
-    
 
+    
+    start.addEventListener("mouseenter", enterTheNarrowArea);
+    start.addEventListener("click", reset);
+    end.startEventListener("mouseenter", winner);
+    
+    
     function enterTheNarrowArea() {
         for (var i = 0; i < boundaries.length-1;i++){
             boundaries[i].addEventListener("mouseover", gameOver);
         }
+
     }
+
+
+
+
+
+    function winner() {
+        loseOrwin.innerHTML = "YOU WIN! CONGRATULATION !"
+        score += 5;
+        const para = document.createElement("p");
+        const node = document.createTextNode("your score is " +score);
+        para.appendChild(node);
+
+        const element = document.getElementsByClassName("boundary")[4];
+        const child = document.getElementById("p1");
+        element.insertBefore(para,child);
+    }
+
+
+
+
 
     function gameOver() {
         for (var i = 0; i < boundaries.length-1;i++){
             boundaries[i].style.backgroundColor = "red";
         }
-        startButton.innerHTML = "Reset";
+        loseOrwin.innerHTML = "YOU LOST! HARD LUCK"
+        loseOrWin.style.backgroundColor = "pink";
+        startButton.innerHTML = "Start";
         startButton.style.padding = "0rem auto";
-        
     }
+
     function reset() {
+
+        document.location.reload()
         
     }
 
