@@ -9,7 +9,8 @@ window.onload = function () {
     var scoreArea = document.getElementsByTagName("p")[1];
     var boundaries = document.getElementsByClassName("boundary");
     var startButton = document.getElementsByClassName('boundary')[5];
-    
+    var starb = document.getElementsByClassName("boundary example")[0];
+
 
     start.addEventListener("mouseenter", enterTheNarrowArea);
     start.addEventListener("mouseleave", changeTheSColor);
@@ -34,13 +35,16 @@ window.onload = function () {
         loseOrwin.innerHTML = "YOU WIN! CONGRATULATION !"
         score += 5;
         
-            for (var i = 0; i < boundaries.length-1;i++){
-            boundaries[i].style.backgroundColor = "green"
+        for (var i = 0; i < boundaries.length-1;i++){
+            boundaries[i].style.backgroundColor = "green";
         };
         for (var i = 0; i < boundaries.length-1;i++){
             boundaries[i].removeEventListener("mouseover", gameOver);
         }
-        scoreArea.innerHTML = 'Your Score is :' + score;   
+        scoreArea.innerHTML = 'Your Score is :' + score; 
+        startButton.innerHTML = "Start";
+        enda.removeEventListener("mouseenter", winner);
+        startAgain();
         
         // removeEventListener(hne zetn)     
     }
@@ -67,6 +71,17 @@ window.onload = function () {
     // reset and refresh
     function reset() {
         document.location.reload();  
+    }
+
+    function startAgain() {
+        starb.addEventListener('click', function () {
+            for (var i = 0; i < boundaries.length - 1; i++) {
+                boundaries[i].style.color = "eeeeee";
+            }
+            scoreArea.innerHTML = 'Your Score is :' + score; 
+            
+        });
+        
     }
 
 
