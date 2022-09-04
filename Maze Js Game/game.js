@@ -3,13 +3,13 @@ window.onload = function () {
 
     var game = document.getElementById("game");
     var start = document.getElementById("start");
-    var enda = document.getElementById("end");
-    enda.addEventListener("click", console.log('werrr'));
+    var enda = document.getElementById("end"); 
     var loseOrwin=document.getElementById("status")
     var score = 0;
+    var scoreArea = document.getElementsByTagName("p")[1];
     var boundaries = document.getElementsByClassName("boundary");
     var startButton = document.getElementsByClassName('boundary')[5];
-
+    
 
     start.addEventListener("mouseenter", enterTheNarrowArea);
     start.addEventListener("mouseleave", changeTheSColor);
@@ -20,6 +20,7 @@ window.onload = function () {
         for (var i = 0; i < boundaries.length-1;i++){
             boundaries[i].addEventListener("mouseover", gameOver);
         }
+        enda.addEventListener("mouseenter", winner);
     }
 
     //change the start button color when the cursor pass it
@@ -32,19 +33,16 @@ window.onload = function () {
     function winner() { 
         loseOrwin.innerHTML = "YOU WIN! CONGRATULATION !"
         score += 5;
-        enda.startEventListener("mouseleave", function winner1(){
+        
             for (var i = 0; i < boundaries.length-1;i++){
             boundaries[i].style.backgroundColor = "green"
+        };
+        for (var i = 0; i < boundaries.length-1;i++){
+            boundaries[i].removeEventListener("mouseover", gameOver);
         }
-        });
-        // const para = document.createElement("p");
-        // const node = document.createTextNode("your score is " +score);
-        // para.appendChild(node);
-
-        // const element = document.getElementsByClassName("boundary")[4];
-        // const child = document.getElementById("p1");
-        // element.insertBefore(para, child);
+        scoreArea.innerHTML = 'Your Score is :' + score;   
         
+        // removeEventListener(hne zetn)     
     }
 
     // function if the user lost
@@ -52,10 +50,18 @@ window.onload = function () {
         for (var i = 0; i < boundaries.length-1;i++){
             boundaries[i].style.backgroundColor = "red";
         }
-        loseOrwin.innerHTML = "YOU LOST! HARD LUCK"
+        enda.removeEventListener("mouseenter", winner);
+        loseOrwin.innerHTML = "YOU LOST! HARD LUCK";
         // loseOrWin.style.backgroundColor = "pink";
         startButton.innerHTML = "Start";
         startButton.style.padding = "0rem auto";
+        if (score <= 4) {
+            score = 0;
+        }
+        else {
+            score -= 5;
+        }
+        scoreArea.innerHTML = 'Your Score is :' + score;        
     }
 
     // reset and refresh
