@@ -13,7 +13,9 @@ window.onload = function () {
 
 
     start.addEventListener("mouseenter", enterTheNarrowArea);
+
     start.addEventListener("mouseleave", changeTheSColor);
+
     start.addEventListener("click", reset);
 
     // get game over if the cursor touch any wall
@@ -65,7 +67,8 @@ window.onload = function () {
         else {
             score -= 5;
         }
-        scoreArea.innerHTML = 'Your Score is :' + score;        
+        scoreArea.innerHTML = 'Your Score is :' + score;  
+        startAgain();
     }
 
     // reset and refresh
@@ -75,11 +78,19 @@ window.onload = function () {
     
     //function to start after losing or winning
     function startAgain() {
-        starb.addEventListener('click', function () {
-            for (var i = 0; i < boundaries.length - 1; i++) {
-                boundaries[i].style.color = "#eeeeee";
+
+        startButton.addEventListener('click', function () {
+            
+            start.addEventListener("mouseenter", enterTheNarrowArea);
+            loseOrwin.innerHTML = 'Begin by moving your mouse over the "S".';
+            for (var i = 0; i < boundaries.length-1;i++){ //make the boudaries red
+            boundaries[i].style.backgroundColor = "#eeeeee";
+        }
+            for (var i = 0; i < boundaries.length-1 ; i++){
+                boundaries[i].removeEventListener("mouseover", gameOver);
             }
             scoreArea.innerHTML = 'Your Score is :' + score; 
+            startButton.innerHTML = "";
             
         });
         
