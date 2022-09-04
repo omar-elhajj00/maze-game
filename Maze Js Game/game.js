@@ -51,13 +51,13 @@ window.onload = function () {
 
     // function if the user lost
     function gameOver() {
-        for (var i = 0; i < boundaries.length-1;i++){
+        for (var i = 0; i < boundaries.length-1;i++){ //make the boudaries red
             boundaries[i].style.backgroundColor = "red";
         }
-        enda.removeEventListener("mouseenter", winner);
+        enda.removeEventListener("mouseenter", winner); //remove the winner event
         loseOrwin.innerHTML = "YOU LOST! HARD LUCK";
         // loseOrWin.style.backgroundColor = "pink";
-        startButton.innerHTML = "Start";
+        startButton.innerHTML = "Start"; 
         startButton.style.padding = "0rem auto";
         if (score <= 4) {
             score = 0;
@@ -72,11 +72,12 @@ window.onload = function () {
     function reset() {
         document.location.reload();  
     }
-
+    
+    //function to start after losing or winning
     function startAgain() {
         starb.addEventListener('click', function () {
             for (var i = 0; i < boundaries.length - 1; i++) {
-                boundaries[i].style.color = "eeeeee";
+                boundaries[i].style.color = "#eeeeee";
             }
             scoreArea.innerHTML = 'Your Score is :' + score; 
             
