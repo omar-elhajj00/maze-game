@@ -46,9 +46,8 @@ window.onload = function () {
         scoreArea.innerHTML = 'Your Score is :' + score; 
         startButton.innerHTML = "Start";
         enda.removeEventListener("mouseenter", winner);
-        startAgain();
-        
-        // removeEventListener(hne zetn)     
+        start.removeEventListener("mouseenter", enterTheNarrowArea);
+        startAgain();   
     }
 
     // function if the user lost
@@ -57,8 +56,10 @@ window.onload = function () {
             boundaries[i].style.backgroundColor = "red";
         }
         enda.removeEventListener("mouseenter", winner); //remove the winner event
+        for (var i = 0; i < boundaries.length-1;i++){
+            boundaries[i].removeEventListener("mouseover", gameOver);
+        }
         loseOrwin.innerHTML = "YOU LOST! HARD LUCK";
-        // loseOrWin.style.backgroundColor = "pink";
         startButton.innerHTML = "Start"; 
         startButton.style.padding = "0rem auto";
         if (score <= 4) {
@@ -79,6 +80,10 @@ window.onload = function () {
     //function to start after losing or winning
     function startAgain() {
 
+        startButton.addEventListener("mouseover", function () { 
+            startButton.style.cursor = "pointer";
+        });
+
         startButton.addEventListener('click', function () {
             
             start.addEventListener("mouseenter", enterTheNarrowArea);
@@ -91,6 +96,7 @@ window.onload = function () {
             }
             scoreArea.innerHTML = 'Your Score is :' + score; 
             startButton.innerHTML = "";
+            start.style.backgroundColor = "green";
             
         });
         
